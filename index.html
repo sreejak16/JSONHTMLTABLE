@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta character="UTF-8"/>
+    </head>
+    <body>
+        <script>
+            function fun(){
+                fetch("college.json")
+                .then((res)=>{
+                    return res.json();})
+                    .then((data)=>{
+                        for(item of data)
+                        console.log(item);
+                    })
+            }
+        </script>
+        <body>
+            <input type="button" value="Submit"
+            onclick="fun()">
+            <br>
+            <br>
+            <br>
+            
+        </body>
+    </body>
+</html>

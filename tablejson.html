@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Table</title>
+    <style>
+        table {
+            border: 1px solid black; /* Add border style here */
+            border-collapse: collapse; /* Optional: Collapse borders into a single border line */
+        }
+        th, td {
+            border: 1px solid black; /* Add border to table cells */
+            padding: 8px; /* Add some padding for better styling */
+        }
+    </style>
+</head>
+<body>
+    <input type="button" value="Get data from JSON" onclick="fun()">
+    <br>
+    <br>
+    <script>
+        function fun() {
+            fetch("college.json")
+                .then((res) => res.json())
+                .then(data => {
+                    const tab = document.createElement("table");
+                    const tblbody = document.createElement("tbody");
+
+                    // Create table headers
+                    const header = tab.createTHead();
+                    const headerRow = header.insertRow(0);
+
+                    for (const key in data[0]) {
+                        const th = document.createElement("th");
+                        th.innerText = key;
+                        headerRow.appendChild(th);
+                    }
+
+                    // Create table rows and populate with data
+                    data.forEach((item, index) => {
+                        const row = tblbody.insertRow(index);
+
+                        for (const key in item) {
+                            const cell = row.insertCell();
+                            cell.innerText = item[key];
+                        }
+                    });
+
+                    tab.appendChild(tblbody);
+                    document.body.appendChild(tab);
+                })
+                .catch(error => {
+                    console.error("Error fetching JSON data: " + error);
+                });
+        }
+    </script>
+</body>
+</html>
